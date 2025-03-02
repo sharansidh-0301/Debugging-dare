@@ -1,0 +1,71 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+    <link rel="stylesheet" href="./output.css">
+    <title>Debugging IDE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-800"> 
+        
+    <div class="text-white text-2xl font-bold text-center m-4 ">
+        <a href="{% url 'index' %}" >Debugging IDE</a>
+    </div>
+
+    <div class=" bg-gray-100/50 flex-grow text-black w-3/4  px-3 py-2 h-16 md:w-5/12 lg:w-full">
+        <div class="flex justify-between">
+            <p class="text-3xl font-bold font-sans  ">Question-1</p>
+        </div>
+        
+    </div> 
+    <div class="flex  gap-2 m-10">
+        <div class="w-1/2 bg-indigo-600  p-4 rounded shadow h-ful ">
+            <textarea id="codeInput" class="w-full h-48 p-2 border rounded  bg-indigo-900 text-base leading-relaxed text-blue-400" placeholder="Enter your code here..."></textarea>
+            <div class="flex space-x-4 mt-4">
+                <div class="flex flex-row justify-between w-full ">
+                    <button class="text-white  font-semibold bg-indigo-500  px-4 rounded-md">Compile</button>
+                    <button onclick="handleSubmit()" class="px-4 py-2  bg-green-500 text-white rounded  ">Submit</button>
+                    <button onclick="toggleAnswer()" class="px-4 py-2  text-white border rounded ">Show Answer</button>    
+                </div>
+                </div>
+        </div>
+    
+        <div class="w-1/2  bg-indigo-900 p-4 rounded shadow flex flex-col gap-10">
+            <p class="font-semibold text-white">Errors Found: <span id="errorCount">0</span></p>
+            <p class="font-semibold text-white">Expected Output:</p>
+            <pre class="bg-indigo-600 p-2 text-white rounded" id="expectedOutput">Expected Output Here</pre>
+            <p class="font-semibold text-white">Your Output:</p>
+            <pre class="bg-indigo-600 p-2 rounded text-white" id="userOutput">-</pre>
+            <p class="text-red-500 " id="feedback"></p>
+            <div id="answerSection" class="hidden mt-2 ">
+                <p class="font-semibold text-white mb-4">Correct Answer:</p>
+                <pre class="bg-gray-400 p-2 rounded mb-4" id="correctAnswer">Correct Solution Code</pre>
+            </div>
+        </div>
+    
+    </div>
+
+
+<div class="p-6 max-w-4xl  mx-auto space-y-6">
+    
+    
+    
+</div>
+    <script>
+        function handleSubmit() {
+            const simulatedErrors = Math.floor(Math.random() * 5);
+            document.getElementById("errorCount").textContent = simulatedErrors;
+            document.getElementById("userOutput").textContent = simulatedErrors === 0 ? "Expected Output Here" : "Incorrect Output";
+            document.getElementById("feedback").textContent = simulatedErrors === 0 ? "Great job! No errors found." : `Found ${simulatedErrors} errors. Try debugging!`;
+        }
+        
+        function toggleAnswer() {
+            const answerSection = document.getElementById("answerSection");
+            answerSection.classList.toggle("hidden");
+        }
+    </script>
+</body>
+</html>
